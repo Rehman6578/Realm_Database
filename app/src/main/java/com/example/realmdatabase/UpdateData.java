@@ -1,11 +1,14 @@
 package com.example.realmdatabase;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Update;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,12 +19,12 @@ import io.realm.Realm;
 
 public class UpdateData extends AppCompatActivity {
 
-    TextInputEditText Id, CourseID,CName,CDesc,CTrack,CDuration;
-    MaterialButton update,delete;
+    TextInputEditText Id, CourseID, CName, CDesc, CTrack, CDuration;
+    MaterialButton update, delete;
     long id;
     Realm realm;
 
-    private DataModel dataModel;
+    private DataModel dataModel,dataModel1;
 //    private Bundle bundle;
 //    private DataModel dataModel;
 //    private int position;
@@ -44,9 +47,7 @@ public class UpdateData extends AppCompatActivity {
         delete = findViewById(R.id.Delete);
 
 
-
-        String Cname,Cdesc,Ctrack,Cduration;
-
+        String Cname, Cdesc, Ctrack, Cduration;
 
 
         CName.setText(getIntent().getStringExtra("courseName"));
@@ -55,23 +56,20 @@ public class UpdateData extends AppCompatActivity {
         CDuration.setText(getIntent().getStringExtra("courseDuration"));
 
 
-
-
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String  courseN, courseDecp, courseT, courseDur;
+                String courseN, courseDecp, courseT, courseDur;
 
-                id=getIntent().getLongExtra("id",0);
+                id = getIntent().getLongExtra("id", 0);
 
                 courseN = CName.getText().toString();
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();
                 courseDur = CDuration.getText().toString();
 
-                 dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
+                dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
 
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
@@ -85,7 +83,7 @@ public class UpdateData extends AppCompatActivity {
                         realm.copyToRealmOrUpdate(dataModel);
 
                         Toast.makeText(UpdateData.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(UpdateData.this,RetriveData.class);
+                        Intent intent = new Intent(UpdateData.this, RetriveData.class);
                         startActivity(intent);
                         finish();
                     }
@@ -94,39 +92,44 @@ public class UpdateData extends AppCompatActivity {
             }
         });
 
-
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
+                id=getIntent().getLongExtra("id",0);
+                deleteCourse(id);
 
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        dataModel.deleteFromRealm();
+                Toast.makeText(UpdateData.this, "Course Deleted.", Toast.LENGTH_SHORT).show();
 
-                        dataModel=null;
-
-                        Toast.makeText(UpdateData.this, "Delete Course", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UpdateData.this,RetriveData.class));
-                        finish();
-                    }
-
-                });
-
-
+                Intent i = new Intent(UpdateData.this, RetriveData.class);
+                startActivity(i);
+                finish();
             }
         });
 
 
-
     }
 
-    private void deletecourse(long id) {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-
-
+        realm.close();
     }
+
+    private void deleteCourse(long id) {
+
+         dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                dataModel.deleteFromRealm();
+            }
+        });
+
+}
+
 
 }

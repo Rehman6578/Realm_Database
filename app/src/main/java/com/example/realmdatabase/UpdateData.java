@@ -15,8 +15,11 @@ public class UpdateData extends AppCompatActivity {
 
     TextInputEditText CourseID,CName,CDesc,CTrack,CDuration;
     MaterialButton update,delete;
-    long id;
+//    long id;
     Realm realm;
+
+    private int position;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,7 +43,7 @@ public class UpdateData extends AppCompatActivity {
         Cdesc = getIntent().getStringExtra("courseDescription");
         Ctrack = getIntent().getStringExtra("courseTrack");
         Cduration= getIntent().getStringExtra("courseDuration");
-        id = getIntent().getLongExtra("id", 0);
+//        id = getIntent().getLongExtra("id", 0);
 
         CName.setText(Cname);
         CDesc.setText(Cdesc);

@@ -63,11 +63,7 @@ public class RetriveDataAdapter extends RecyclerView.Adapter<RetriveDataAdapter.
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, UpdateData.class);
-                intent.putExtra("courseName", dataModel.getCourseName());
-                intent.putExtra("courseDescription", dataModel.getCourseDescription());
-                intent.putExtra("courseTrack", dataModel.getCourseTrack());
-                intent.putExtra("courseDuration", dataModel.getCourseDuration());
-                intent.putExtra("id",dataModel.getId());
+                intent.putExtra("position", position);
                 context.startActivity(intent);
 
 
@@ -91,7 +87,7 @@ public class RetriveDataAdapter extends RecyclerView.Adapter<RetriveDataAdapter.
         public retrivedata(View itemView) {
 
             super(itemView);
-            courseId = itemView.findViewById(R.id.courseid);
+
             courseName = itemView.findViewById(R.id.courseName);
             courseDescription = itemView.findViewById(R.id.courseDescription);
             coursetrack = itemView.findViewById(R.id.courseTrack);

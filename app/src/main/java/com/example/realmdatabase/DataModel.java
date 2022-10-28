@@ -1,9 +1,11 @@
 package com.example.realmdatabase;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class DataModel extends RealmObject {
+public class DataModel extends RealmObject implements Serializable {
 
 
     @PrimaryKey

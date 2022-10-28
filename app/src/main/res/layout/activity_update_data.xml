@@ -19,33 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edcourseid"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="12dp"
-        android:textColorHint="@color/black"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxStrokeColor="#3F9EF1"
-        app:endIconMode="clear_text"
-        app:hintTextColor="#3F9EF1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/realmedatabase">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Courseid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Course Id"
-            android:padding="15dp" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +36,7 @@
         app:hintTextColor="#3F9EF1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edcourseid">
+        app:layout_constraintTop_toBottomOf="@+id/realmedatabase">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Coursename"

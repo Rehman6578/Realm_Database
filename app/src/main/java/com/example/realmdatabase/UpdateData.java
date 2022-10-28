@@ -32,7 +32,7 @@ public class UpdateData extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
 
-        CourseID = findViewById(R.id.Courseid);
+//        CourseID = findViewById(R.id.Courseid);
         CName = findViewById(R.id.Coursename);
         CDesc = findViewById(R.id.Coursedescription);
         CTrack = findViewById(R.id.Coursetrack);
@@ -44,17 +44,15 @@ public class UpdateData extends AppCompatActivity {
 
         String Cname,Cdesc,Ctrack,Cduration;
 
-        Cname = getIntent().getStringExtra("courseName");
-        Cdesc = getIntent().getStringExtra("courseDescription");
-        Ctrack = getIntent().getStringExtra("courseTrack");
-        Cduration= getIntent().getStringExtra("courseDuration");
-        id = getIntent().getLongExtra("id", 0);
+        DataModel model= (DataModel) getIntent().getExtras().getSerializable("datamodels");
 
-        CName.setText(Cname);
-        CDesc.setText(Cdesc);
-        CTrack.setText(Ctrack);
-        CDuration.setText(Cduration);
-        Id.setText(String.valueOf(id));
+        id=model.getId();
+        CName.setText(model.getCourseName());
+        CDesc.setText(model.getCourseDescription());
+        CTrack.setText(model.getCourseTrack());
+        CDuration.setText(model.getCourseDuration());
+
+
 
 
 
@@ -64,7 +62,7 @@ public class UpdateData extends AppCompatActivity {
 
                 String  ID,courseN, courseDecp, courseT, courseDur;
 
-                ID=Id.getText().toString();
+
                 courseN = CName.getText().toString();
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();

@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         long nextid ;
 
-
         if (id ==null){
             nextid =1;
 

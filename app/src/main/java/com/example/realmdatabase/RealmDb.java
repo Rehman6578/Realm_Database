@@ -16,7 +16,9 @@ public class RealmDb extends Application{
 
         RealmConfiguration configuration=new RealmConfiguration.Builder()
                 .allowWritesOnUiThread(true)
-                .allowQueriesOnUiThread(true).deleteRealmIfMigrationNeeded().build();
+                .allowQueriesOnUiThread(true)
+                .deleteRealmIfMigrationNeeded()
+                .build();
 
 
         Realm.setDefaultConfiguration(configuration);

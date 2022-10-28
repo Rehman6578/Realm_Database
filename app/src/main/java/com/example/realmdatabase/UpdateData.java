@@ -19,15 +19,13 @@ import io.realm.Realm;
 
 public class UpdateData extends AppCompatActivity {
 
-    TextInputEditText Id, CourseID, CName, CDesc, CTrack, CDuration;
+    TextInputEditText  CName, CDesc, CTrack, CDuration;
     MaterialButton update, delete;
     long id;
     Realm realm;
 
-    private DataModel dataModel,dataModel1;
-//    private Bundle bundle;
-//    private DataModel dataModel;
-//    private int position;
+    private DataModel dataModel;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -38,7 +36,6 @@ public class UpdateData extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
 
-//        CourseID = findViewById(R.id.Courseid);
         CName = findViewById(R.id.Coursename);
         CDesc = findViewById(R.id.Coursedescription);
         CTrack = findViewById(R.id.Coursetrack);
@@ -47,7 +44,6 @@ public class UpdateData extends AppCompatActivity {
         delete = findViewById(R.id.Delete);
 
 
-        String Cname, Cdesc, Ctrack, Cduration;
 
 
         CName.setText(getIntent().getStringExtra("courseName"));
@@ -69,6 +65,8 @@ public class UpdateData extends AppCompatActivity {
                 courseT = CTrack.getText().toString();
                 courseDur = CDuration.getText().toString();
 
+
+                // Update Record in database
                 dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
 
                 realm.executeTransaction(new Realm.Transaction() {
@@ -83,7 +81,6 @@ public class UpdateData extends AppCompatActivity {
                         realm.copyToRealmOrUpdate(dataModel);
 
                         Toast.makeText(UpdateData.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                        finish();
                         Intent intent = new Intent(UpdateData.this, RetriveData.class);
                         startActivity(intent);
                         finish();
@@ -120,6 +117,7 @@ public class UpdateData extends AppCompatActivity {
 
     private void deleteCourse(long id) {
 
+        // Delete Record from database
          dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
 
         realm.executeTransaction(new Realm.Transaction() {

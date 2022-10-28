@@ -42,6 +42,7 @@ public class RetriveData extends AppCompatActivity {
         super.onResume();
 
 
+        // Retrive all data from datbase
         RealmResults<DataModel> dataModels = realm.where(DataModel.class).findAll();
 
         retriveDataAdapter= new RetriveDataAdapter(dataModels,this);

@@ -85,22 +85,16 @@ public class RetriveDataAdapter extends RecyclerView.Adapter<RetriveDataAdapter.
 
     class retrivedata extends RecyclerView.ViewHolder{
 
-        TextView courseId, courseName,courseDescription,coursetrack,courseduration;
+        TextView courseName,courseDescription,coursetrack,courseduration;
 
 
         public retrivedata(View itemView) {
 
             super(itemView);
-//            courseId = itemView.findViewById(R.id.courseid);
             courseName = itemView.findViewById(R.id.courseName);
             courseDescription = itemView.findViewById(R.id.courseDescription);
             coursetrack = itemView.findViewById(R.id.courseTrack);
             courseduration = itemView.findViewById(R.id.courseDuration);
-
-
-
-
-
 
 
 

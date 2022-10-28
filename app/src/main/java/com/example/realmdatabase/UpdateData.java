@@ -93,6 +93,26 @@ public class UpdateData extends AppCompatActivity {
         });
 
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dataModel=realm.where(DataModel.class).equalTo("id",id).findFirst();
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+
+                        dataModel.deleteFromRealm();
+
+                        Toast.makeText(UpdateData.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+
+
 
     }
 

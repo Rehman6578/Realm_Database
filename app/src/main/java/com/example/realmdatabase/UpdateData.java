@@ -3,6 +3,7 @@ package com.example.realmdatabase;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,10 +16,12 @@ public class UpdateData extends AppCompatActivity {
 
     TextInputEditText CourseID,CName,CDesc,CTrack,CDuration;
     MaterialButton update,delete;
-//    long id;
+    long id;
     Realm realm;
 
-    private int position;
+//    private Bundle bundle;
+    private DataModel dataModel;
+//    private int position;
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,6 +39,8 @@ public class UpdateData extends AppCompatActivity {
         CDuration = findViewById(R.id.Courseduration);
         update = findViewById(R.id.Update);
         delete = findViewById(R.id.Delete);
+
+
 
         String Cname,Cdesc,Ctrack,Cduration;
 
@@ -62,6 +67,19 @@ public class UpdateData extends AppCompatActivity {
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();
                 courseDur = CDuration.getText().toString();
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        dataModel.setCourseName(courseN);
+                        dataModel.setCourseDescription(courseDecp);
+                        dataModel.setCourseTrack(courseT);
+                        dataModel.setCourseDuration(courseDur);
+                        Intent intent = new Intent(UpdateData.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
 
             }
         });

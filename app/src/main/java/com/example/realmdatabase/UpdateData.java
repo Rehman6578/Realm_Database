@@ -1,6 +1,7 @@
 package com.example.realmdatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Update;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -64,6 +65,7 @@ public class UpdateData extends AppCompatActivity {
                 String  courseN, courseDecp, courseT, courseDur;
 
                 id=getIntent().getLongExtra("id",0);
+
                 courseN = CName.getText().toString();
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();
@@ -83,7 +85,7 @@ public class UpdateData extends AppCompatActivity {
                         realm.copyToRealmOrUpdate(dataModel);
 
                         Toast.makeText(UpdateData.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(UpdateData.this,MainActivity.class);
+                        Intent intent = new Intent(UpdateData.this,RetriveData.class);
                         startActivity(intent);
                         finish();
                     }
@@ -97,20 +99,31 @@ public class UpdateData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dataModel=realm.where(DataModel.class).equalTo("id",id).findFirst();
+                dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
 
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-
                         dataModel.deleteFromRealm();
 
-                        Toast.makeText(UpdateData.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        dataModel=null;
 
+                        Toast.makeText(UpdateData.this, "Delete Course", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(UpdateData.this,RetriveData.class));
+                        finish();
                     }
+
                 });
+
+
             }
         });
+
+
+
+    }
+
+    private void deletecourse(long id) {
 
 
 

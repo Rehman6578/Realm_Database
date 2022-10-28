@@ -35,17 +35,18 @@ public class RetriveData extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
         RealmResults<DataModel> dataModels = realm.where(DataModel.class).findAll();
 
         retriveDataAdapter= new RetriveDataAdapter(dataModels,this);
 
         recyclerView.setAdapter(retriveDataAdapter);
-
-
-
-
-
 
 
     }

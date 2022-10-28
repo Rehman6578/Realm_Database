@@ -152,11 +152,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#3F9EF1"
+        android:backgroundTint="#F11706"
         android:padding="15dp"
         android:text="Delete Record"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:cornerRadius="15dp"
         app:layout_constraintTop_toBottomOf="@+id/Update"
         tools:layout_editor_absoluteX="0dp" />

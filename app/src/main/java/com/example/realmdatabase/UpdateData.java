@@ -14,7 +14,7 @@ import io.realm.Realm;
 
 public class UpdateData extends AppCompatActivity {
 
-    TextInputEditText CourseID,CName,CDesc,CTrack,CDuration;
+    TextInputEditText Id, CourseID,CName,CDesc,CTrack,CDuration;
     MaterialButton update,delete;
     long id;
     Realm realm;
@@ -48,12 +48,13 @@ public class UpdateData extends AppCompatActivity {
         Cdesc = getIntent().getStringExtra("courseDescription");
         Ctrack = getIntent().getStringExtra("courseTrack");
         Cduration= getIntent().getStringExtra("courseDuration");
-//        id = getIntent().getLongExtra("id", 0);
+        id = getIntent().getLongExtra("id", 0);
 
         CName.setText(Cname);
         CDesc.setText(Cdesc);
         CTrack.setText(Ctrack);
         CDuration.setText(Cduration);
+        Id.setText(String.valueOf(id));
 
 
 
@@ -61,8 +62,9 @@ public class UpdateData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String courseN, courseDecp, courseT, courseDur;
+                String  ID,courseN, courseDecp, courseT, courseDur;
 
+                ID=Id.getText().toString();
                 courseN = CName.getText().toString();
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();
@@ -71,6 +73,7 @@ public class UpdateData extends AppCompatActivity {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
+                        dataModel.setId(id);
                         dataModel.setCourseName(courseN);
                         dataModel.setCourseDescription(courseDecp);
                         dataModel.setCourseTrack(courseT);

@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -64,7 +63,11 @@ public class RetriveDataAdapter extends RecyclerView.Adapter<RetriveDataAdapter.
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, UpdateData.class);
-                intent.putExtra("dataModels", dataModel);
+                intent.putExtra("courseName", dataModel.getCourseName());
+                intent.putExtra("courseDescription", dataModel.getCourseDescription());
+                intent.putExtra("courseTrack", dataModel.getCourseTrack());
+                intent.putExtra("courseDuration", dataModel.getCourseDuration());
+                intent.putExtra("id",dataModel.getId());
                 context.startActivity(intent);
 
 

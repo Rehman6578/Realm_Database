@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,8 +20,9 @@ public class UpdateData extends AppCompatActivity {
     long id;
     Realm realm;
 
-//    private Bundle bundle;
     private DataModel dataModel;
+//    private Bundle bundle;
+//    private DataModel dataModel;
 //    private int position;
 
 
@@ -44,13 +46,12 @@ public class UpdateData extends AppCompatActivity {
 
         String Cname,Cdesc,Ctrack,Cduration;
 
-        DataModel model= (DataModel) getIntent().getExtras().getSerializable("datamodels");
 
-        id=model.getId();
-        CName.setText(model.getCourseName());
-        CDesc.setText(model.getCourseDescription());
-        CTrack.setText(model.getCourseTrack());
-        CDuration.setText(model.getCourseDuration());
+
+        CName.setText(getIntent().getStringExtra("courseName"));
+        CDesc.setText(getIntent().getStringExtra("courseDescription"));
+        CTrack.setText(getIntent().getStringExtra("courseTrack"));
+        CDuration.setText(getIntent().getStringExtra("courseDuration"));
 
 
 
@@ -60,22 +61,28 @@ public class UpdateData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String  ID,courseN, courseDecp, courseT, courseDur;
+                String  courseN, courseDecp, courseT, courseDur;
 
-
+                id=getIntent().getLongExtra("id",0);
                 courseN = CName.getText().toString();
                 courseDecp = CDesc.getText().toString();
                 courseT = CTrack.getText().toString();
                 courseDur = CDuration.getText().toString();
 
+                 dataModel = realm.where(DataModel.class).equalTo("id", id).findFirst();
+
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        dataModel.setId(id);
+
                         dataModel.setCourseName(courseN);
                         dataModel.setCourseDescription(courseDecp);
                         dataModel.setCourseTrack(courseT);
                         dataModel.setCourseDuration(courseDur);
+
+                        realm.copyToRealmOrUpdate(dataModel);
+
+                        Toast.makeText(UpdateData.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UpdateData.this,MainActivity.class);
                         startActivity(intent);
                         finish();

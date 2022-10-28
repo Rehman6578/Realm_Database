@@ -83,6 +83,7 @@ public class UpdateData extends AppCompatActivity {
                         realm.copyToRealmOrUpdate(dataModel);
 
                         Toast.makeText(UpdateData.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                        finish();
                         Intent intent = new Intent(UpdateData.this, RetriveData.class);
                         startActivity(intent);
                         finish();
